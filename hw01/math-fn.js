@@ -1,42 +1,41 @@
+"use strict";
 /**
  * Результатом выполнения этих заданий будет набор некоторых математических функций.
  */
 
 
 /**
- * Задание 0. Создать функцию multiply, перемножающаю два числа, 
+ * Задание 0. Создать функцию multiply, перемножающаю два числа,
  * переданных в качестве аргументов. Если переданные аргументы не являются
- * конечными числами, выбрасывать ошибку "Invalid arguments" 
+ * конечными числами, выбрасывать ошибку "Invalid arguments"
  * (используйте throw new Error("Invalid arguments")).
  *
  * @example
  * var result = multiply(1,2); // 2
- * 
+ *
  * @param {Number} a
  * Первое число для перемножения.
- * 
+ *
  * @param {Number} b
  * Второе число для перемножения (необязательный параметр).
- * 
+ *
  * @return {Number} Факториал числа.
  */
 
- function multiply(a, b){
- 	
- 	function isNumber(x){
- 		return (typeof x === "number") && !isNaN(x) && isFinite(x);
- 	}
+function multiply(a, b) {
+    if (arguments.length < 2) {
+        throw new Error("Invalid arguments");
+    }
 
- 	if(arguments.length < 2){
- 		throw new Error("Invalid arguments");
- 	}
+    if (!isNumber(a) || !isNumber(b)) {
+        throw new Error("Invalid arguments");
+    }
 
- 	if(!isNumber(a) || !isNumber(b)){
- 		throw new Error("Invalid arguments");
- 	}
-
- 	return a*b;
- }
+    return a*b;
+}
+function isNumber(x) {
+    return (typeof x === "number") && !isNaN(x) && isFinite(x);
+}
 
 
 /**
@@ -49,9 +48,13 @@
  *
  * @param {Number} n
  * Число, для которого считается факториал.
- * 
+ *
  * @return {Number} факториал числа.
  */
+function factorial (n) {
+    if (!isNumber(n)) throw new Error("Input is not a number");
+    return (n-1 === 0) ? n : factorial (n-1) * n;
+}
 
 /**
  * Задание 2. Создать функцию nfib для подсчета n-го числа Фибоначчи
@@ -67,3 +70,17 @@
  *
  * @return {Number} Число Фибоначчи.
  */
+function nfib (number) {
+    if (!number) throw new Error("Uncorrect input");
+    if (!isNumber(number)) throw new Error("Input is not a number");
+
+    function findFibonacci(number, prev, curr) {
+        return number === 2 ? curr : findFibonacci(number-1, curr, prev+curr);
+    }
+
+    return findFibonacci(number, 0, 1);
+}
+
+console.time("F1");
+console.log(nfib(1000));
+console.timeEnd("F1");
