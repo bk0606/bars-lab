@@ -52,7 +52,9 @@ function isNumber(x) {
  * @return {Number} факториал числа.
  */
 function factorial (n) {
-    if (!isNumber(n)) throw new Error("Input is not a number");
+    if (!isNumber(n)) { 
+        throw new Error("Input is not a number"); 
+    }
     return (n-1 === 0) ? n : factorial (n-1) * n;
 }
 
@@ -65,14 +67,18 @@ function factorial (n) {
  * @example
  * var fith = nfib(5); // 3 (числа Фибоначчи - 0 1 1 2 3 5...)
  *
- * @param {Number} n
+ * @param {Number} number
  * Порядковый номер.
  *
  * @return {Number} Число Фибоначчи.
  */
-function nfib (number) {
-    if (!number) throw new Error("Uncorrect input");
-    if (!isNumber(number)) throw new Error("Input is not a number");
+function nfib(number) {
+    if (!number) {
+        throw new Error("Uncorrect input");
+    }
+    if (!isNumber(number)) { 
+        throw new Error("Input is not a number");
+    }
 
     function findFibonacci(number, prev, curr) {
         return number === 2 ? curr : findFibonacci(number-1, curr, prev+curr);
@@ -80,7 +86,3 @@ function nfib (number) {
 
     return findFibonacci(number, 0, 1);
 }
-
-console.time("F1");
-console.log(nfib(1000));
-console.timeEnd("F1");

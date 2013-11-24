@@ -27,16 +27,17 @@
  */
 
 function format(sLine, sValues) {
-	var line = "",
+    var line = "",
         tokens = new Int8Array(arguments.length),
-        index = 0, tokenCnt = 0, i = 0, len = 0;
-	// chek input
-    line = (typeof sLine == "string") && sLine;
+        index = 0, tokenCnt = 0,
+        len = 0, i = 0;
+    // chek input
+    line = (typeof(sLine) === "string") && sLine;
     if (!line) {
         throw new Error("Uncorrect input");
     }
     // Find tokenCnt. Split helps to find the number of occur of a regexp
-    tokenCnt = line.split(/[{]\s*\d+\s*[}]/).length-1;
+    tokenCnt = line.split(/[{]\s*\d+\s*[}]/).length - 1;
     if (tokenCnt === 0) {
         return line;
     }
@@ -45,13 +46,14 @@ function format(sLine, sValues) {
     }
     for (i = 1, len = arguments.length; i < len; i++) {
         tokens = /[{]\s*\d+\s*[}]/.exec(line);
-        index = tokens[0].replace(/[{}]/g, "");
-        line  = line.replace(tokens[0], arguments[+index+1]);
+        if (tokens) {
+            index = tokens[0].replace(/[{}]/g, "");
+            line  = line.replace(tokens[0], arguments[+index+1]);
+        }
     };
 
     return line;
 }
-
 
 /**
  * Задание 2. Создать функцию repeat.
@@ -66,16 +68,27 @@ function format(sLine, sValues) {
  * @param {Number} count
  * Количество повторений.
  *
- * @param {String} [sSep]
+ * @param {String} sSep
  * Разделитель (необязательный параметр).
  *
  * @return {String} Строка с повотрениями.
  */
 
 function repeat(str, count, sSep) {
-	// first create empty array, then join it with divider - '|||',
-	// then split str to array by divider and join str by @param sSep
-    return new Array(count+1).join(str+"|||").split("|||", count).join(sSep || '');
+    var repetitive = "",
+        cnt = count-1,
+        sep = "";
+    if (typeof(str) !== "string" || cnt === NaN) {
+        throw new Error("Incorrect input in repeat func");
+    }
+    for (cnt; cnt >= 0; cnt--) {
+        repetitive += sep;
+        repetitive += str;
+        sep = sSep || "";
+    }
+    return repetitive;
+    // Next variant shorter than previous but slowly in 2 times :(
+    // new Array(count+1).join(str+"|||").split("|||", count).join(sSep || '');
 }
 
 /**
@@ -92,15 +105,15 @@ function repeat(str, count, sSep) {
  */
 
 function toGetParams(obj) {
-	var key = null,
-		sGetRqst = "",
-		amp = "";
-	for (key in obj) {
-		sGetRqst += amp + key + "=" + obj[key];
-		amp = "&";
-	}
-
-    return sGetRqst; // JSON.stringify(obj).replace(/[{}'"]/g, '').replace(/[:]/g, '=').replace(/[,]/g, '&')
+    var key = null,
+        sGetRqst = "",
+        amp = "";
+    for (key in obj) {
+        sGetRqst += amp
+        sGetRqst += key + "=" + obj[key];
+        amp = "&";
+    }
+    return sGetRqst;
 }
 
 /**
@@ -142,7 +155,7 @@ function formatUrl(sUrl, obj) {
  */
 
 function startsWith(str, sPrefix) {
-    return str.indexOf(sPrefix) === 0 ? true : false;
+    return str.indexOf(sPrefix) === 0;
 }
 
 /**
@@ -164,5 +177,5 @@ function startsWith(str, sPrefix) {
  */
 
 function endsWith(str, sPrefix) {
-    return str.lastIndexOf(sPrefix) === (str.length - sPrefix.length) ? true : false;
+    return str.lastIndexOf(sPrefix) === (str.length - sPrefix.length);
 }
