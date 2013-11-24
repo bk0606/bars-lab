@@ -16,10 +16,10 @@
  * @param {String} name Имя воина.
  * @param {Number} level Уровень воина.
  */
-function Warrior(name, level){
-  // Ваш код здесь...
+function Warrior(name, level) {
   this.name = name;
   this.level = level;
+  this.warriorCode = "";
 }
 
 /**
@@ -32,11 +32,22 @@ function Warrior(name, level){
  * Метод атаки воина.
  * @example
  * warrior.attack(); // Воин атакует.
- * @name Warrior.attack
+ * @name {Warrior.attack}
  * @return {Number} Урон, наносимой атакой.
  */
-Warrior.prototype.attack = function() {
-  // Ваш код здесь...
+Warrior.prototype.attack = function () {
+  return this.level * 0.1;
+};
+
+/**
+ * Метод произнесения кодекса.
+ * @example
+ * warrior.getCode(); // Воин произносит кодекс.
+ * @name {Warrior.getCode}
+ * @return {String} Кодекс воина.
+ */
+Warrior.prototype.getCode = function () {
+  return this.warriorCode;
 };
 
 /**
@@ -52,28 +63,27 @@ Warrior.prototype.attack = function() {
  * Создает экземпляр джедая
  * @param {String} name Имя джедая.
  * @param {Number} level Уровень джедая.
+ * @extends {Warrior}
  */
 function Jedi (name, level) {
-  // Ваш код здесь...
+  Warrior.apply(this, arguments);
+  this.sideOfForce = "light";
+  this.warriorCode = "Нет волнения — есть покой...";
 }
+Jedi.prototype = Object.create(Warrior.prototype);
 
 /**
  * Создает экземпляр ситха
  * @param {String} name Имя ситха.
  * @param {Number} level Уровень ситха.
+ * @extends {Warrior}
  */
-// Ваш код здесь...
-
-
-/**
- * Метод произнесения кодекса.
- * @example
- * warrior.getCode(); // Воин произносит кодекс.
- * @name Warrior.getCode
- * @return {String} Кодекс воина.
- */
-// Ваш код здесь...
-
+function Sith (name, level) {
+  Warrior.apply(this, arguments);
+  this.sideOfForce = "dark";
+  this.warriorCode = "Спокойствие — ложь, есть только страсть...";
+}
+Sith.prototype = Object.create(Warrior.prototype);
 
 /**
  * Задание 4. Добавить метод toLightSide классу Jedi.
@@ -89,15 +99,14 @@ function Jedi (name, level) {
  * @example 
  * joda.toLightSide(darth); // Мастер Йода на светлую сторону силы призывает.
  *
- * @name Jedi.toLightSide
+ * @name {Jedi.toLightSide}
  *
  * @param {Sith} sith Ситх, призываемый на светлую сторону
  *
  * @throws Error("Invalid argument")
  * Если призываемый объект не является ситхом, выкидывается исключение.
  */
-// Ваш код здесь...
-
+Jedi.prototype.toLightSide = changeSideOfForce;
 
 /**
  * Задание 5. Добавить метод toDarkSide классу Sith.
@@ -117,4 +126,36 @@ function Jedi (name, level) {
  * @throws Error("Invalid argument")
  * Если призываемый объект не является джедаем, выкидывается исключение.
  */
-// Ваш код здесь...
+Sith.prototype.toDarkSide = changeSideOfForce;
+
+/**
+ * Method using in children of Warrior class,
+ * for changing side of forse Jedi or Sith.
+ * @param {Jedi|Sith} warrior Inherited from warrior
+ * Sith of Jedi instance
+ * @returns {boolean} true - if success, false - if
+ * warrior is not obeyed (this case means, what warroir
+ * passed to enother side of force)
+ */
+function changeSideOfForce(warrior) {
+  var sideThis, sideWar;
+  if (!warrior) {
+    throw new Error("Invalid warrior instance");
+  }
+
+  sideThis = (typeof(this.sideOfForce) === "string") && this.sideOfForce;
+  sideWar = (typeof(warrior.sideOfForce) === "string") && warrior.sideOfForce;
+  if (!sideThis || !sideWar || sideThis === sideWar) {
+    throw new Error("Invalid argument");
+  }
+  if (!this.level || !warrior.level) {
+    throw new Error("Invalid argument");
+  }
+
+  if (this.level > warrior.level) {
+    warrior.sideOfForce = sideThis;
+  } else {
+    this.sideOfForce = sideWar;
+  }
+  return sideThis > sideWar;
+}
