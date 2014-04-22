@@ -1,0 +1,63 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>ClassExtend Testing</title>
+	<script type="text/javascript" src="./ClassExtend.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+
+window.Animal = Class.extend({
+	init: function (name) {
+		this.name = name;
+	}
+});
+
+window.Dog = Animal.extend(
+/* prototype fields: */ {
+	init: function (name) {
+		this.super.init.apply(this, arguments);
+		this.name += "-dog";
+	}
+}, 	{
+	woof: function (count) {
+		for (var i = count-1; i >= 0; i--) {
+			console.log("Gav! ");
+		}
+	}
+});
+
+var Cat = Animal.extend({
+	init: function (name) {
+		this.name = name + "-cat"
+	}
+}, {
+	meow: function (count) {
+		for (var i = 0; i < count; i++) {
+			console.log("Meow! ")
+		};
+	}
+});
+
+// Call static methods
+Cat.meow(5);
+Dog.woof(10);
+
+var Charly = new Dog("Charly"),
+	Vasya = new Cat("Vasya");
+
+Animal.mixin({
+	greet: function () {
+		console.log("Hello! My name is " + this.name);
+	}
+});
+
+Vasya.greet();
+Charly.greet();
+
+console.log(Charly.constructor == Dog);
+console.log(Vasya.constructor == Dog);
+
+</script>
+</body>
+</html>
