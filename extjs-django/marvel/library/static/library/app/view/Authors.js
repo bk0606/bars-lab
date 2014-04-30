@@ -28,27 +28,4 @@ Ext.define('Lib.view.Authors', {
                 xtype: 'textfield'
             }
         }]
-//        dockedItems: [{
-//            xtype: 'toolbar',
-//            items: [{
-//                text: 'Add',
-//                iconCls: 'icon-add',
-//                handler: function(){
-//                    // empty record
-//                    store.insert(0, new Person());
-//                    rowEditing.startEdit(0, 0);
-//                }
-//            }, '-', {
-//                itemId: 'delete',
-//                text: 'Delete',
-//                iconCls: 'icon-delete',
-//                disabled: true,
-//                handler: function(){
-//                    var selection = grid.getView().getSelectionModel().getSelection()[0];
-//                    if (selection) {
-//                        store.remove(selection);
-//                    }
-//                }
-//            }]
-//        }]
     });

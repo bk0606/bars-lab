@@ -85,6 +85,8 @@ function Sith (name, level) {
 }
 Sith.prototype = Object.create(Warrior.prototype);
 
+console.log(Sith.prototype);
+
 /**
  * Задание 4. Добавить метод toLightSide классу Jedi.
  * Метод в качестве параметра принимает экземпляр класса Sith.

@@ -115,7 +115,7 @@ var hulk = (function () {
             hasClass = element.classList.contains(className);
         });
         return hasClass;
-    }
+    };
 
     /**
      * @method html
@@ -159,9 +159,9 @@ var hulk = (function () {
      * Удаляет атрибут из элементов выборки.
      * @param {String} attrName Удаляемый атрибут.
      */
-    Hulk.prototype.removeAttr = function (attr) {
+    Hulk.prototype.removeAttr = function (attrName) {
         this._forEachElement(function (element) {
-            element.removeAttribute(attr);
+            element.removeAttribute(attrName);
         });
     };
 
@@ -233,7 +233,7 @@ var hulk = (function () {
         for (var i = this.elements.length - 1; i >= 0; i--) {
             callbackFn.call(context || this, this.elements[i]);
         }
-    }
+    };
     
     return Hulk;
 

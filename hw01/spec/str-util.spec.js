@@ -34,6 +34,7 @@ describe("Функции для работы со строками:", function()
 
   it("Вызов toGetParams на правильных параметрах", function() {
     expect(toGetParams({p1: 1, p2: 'hello'})).toBe('p1=1&p2=hello');
+    expect(toGetParams({p1: 1, p2: '{ a: "qwe", b: 3 }'})).toBe('p1=1&p2={ a: "qwe", b: 3 }');
     expect(toGetParams({})).toBe('');
   });
 
