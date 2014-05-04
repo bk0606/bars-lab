@@ -137,5 +137,4 @@ describe('Hulk.js', function() {
 
         }
     );
-
 });

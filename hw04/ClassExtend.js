@@ -1,8 +1,8 @@
 
 /**
- * Class - mini OOP framework for encapsulating inheritance routine.
+ * Class - mini OOP framework for encapsulating class creating
+ * and inheritance routine.
  */
-
 Class = (function () {
 
     function Class() {}
@@ -11,10 +11,10 @@ Class = (function () {
      * Method for extending class. 
      * Chain of inheritance starts with: <code>Class.extend({})</code>,
      * and then subclassed like this: <code>MyClass.extend({})</code>
-     * @param  {Object} props  fields and methods of class.
-     * Mast realize method init, it is constructor of class.
-     * @param  {Object} [static] Fields and methods
-     * @return {Class} Which can be subclassed
+     * @param  {Object} protoProps  fields and methods of class.
+     * Should realize method init, it is constructor of class.
+     * @param  {Object} [staticProps] Fields and methods
+     * @return {Function} Which can be subclassed
      */
     Class.extend = function (protoProps, staticProps) {
         function Construct() {
@@ -29,7 +29,7 @@ Class = (function () {
         Class.mixin.call(Construct, protoProps || {}, staticProps || {});
 
         return Construct;
-    }
+    };
 
     /**
      * Method for mixin class by some array of objects.
@@ -44,10 +44,10 @@ Class = (function () {
         for (stProp in staticProps) {
             this[stProp] = staticProps[stProp];
         }
-    }
+    };
 
     /**
-     * Function helps change methods in mixin on a fly
+     * Function bind a function scope. Helps change methods in mixin on a fly.
      * @param  {Object} mixin Mixins object
      * @param  {String} prop  Key of mixin object method
      * @return {Function} bindid function

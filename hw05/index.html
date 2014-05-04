@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<title></title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<link href="style.css" rel="stylesheet">
+	<script src="../libs/angular/angular.js"></script>
+	<script src="src/scripts/controllers.js"></script>
+	<script src="src/scripts/scripts.js"></script>
+</head>
+
+<body ng-app="fastShopApp">
+
+<div class="wrapper" ng-controller="fastShopCtrl">
+
+	<header class="header">
+		<div class="logo">
+			<span class="first">fast</span><span class="second">Shop</span>
+		</div>
+	</header><!-- .header-->
+
+	<div class="middle">
+
+		<div class="container">
+			<main class="content">
+				<ul class="items">
+					<li ng-repeat="item in shops" ng-click="addToCart(item)">
+						<div class="item">
+							<img ng-src="{{item.imgurl}}">
+							<div class="item-name">{{item.name}}</div>
+							<div class="item-price">{{item.price}}</div>
+						</div>
+					</li>
+				</ul>
+			</main><!-- .content -->
+		</div><!-- .container-->
+
+		<aside class="right-sidebar">
+			<div class="basket">
+				<div class="basket-title">Корзина</div>
+				<ul class="basket-content">
+					<li ng-repeat="item in cart track by $index" ng-click="removeFromCart(item)">
+						<div class="basket-name">{{ item.name }}</div>
+						<div class="basket-price">{{ item.price }}</div>
+					</li>
+				</ul>
+				<div class="basket-sum">Итого: {{ itemsPriceSum + postfix }}</div>
+			</div>
+		</aside><!-- .right-sidebar -->
+
+	</div><!-- .middle-->
+
+</div><!-- .wrapper -->
+
+</body>
+</html>

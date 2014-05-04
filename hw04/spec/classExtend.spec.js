@@ -19,10 +19,10 @@ describe('ClassExtend in action > ', function() {
     	/* prototype props: */ {
 	      init: function(owner) {
 	        this.owner = owner;
-	        this.currenLocation = 'Waynes house',
-	        this.maxSpeed = 300
+	        this.currenLocation = 'Waynes house';
+	        this.maxSpeed = 300;
 	      }
-      }, 
+      },
     	/* static props: */ {
 	      getManufacturer: function() {
 	        return 'Made in China';
@@ -127,7 +127,7 @@ describe('ClassExtend in action > ', function() {
       expect(batMoto.goTo.calls.length).toEqual(1);
     });
 
-    it('Поле constructor экземпляра должно ссылаться на создавший его конструктор', function () {
+    it('Поле constructor экземпляра должно ссылаться на создавший его класс', function () {
     	expect(batMoto.constructor == BatMoto).toBe(true);
     	expect(batMobile.constructor == BatMobile).toBe(true);
 
