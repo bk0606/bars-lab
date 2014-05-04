@@ -22,7 +22,7 @@ Ext.define('Lib.view.Main', {
       title: 'Жанры',
       xtype: 'grid',
       itemId: 'genres',
-      store: 'Genre',
+      store: Ext.StoreManager.lookup('Genre'),
       columns: [{
         text: 'Название',
         dataIndex: 'title',
@@ -39,7 +39,35 @@ Ext.define('Lib.view.Main', {
       }]
     }, {
       title: 'Авторы',
-      itemId: 'authors'
+      xtype: 'grid',
+      itemId: 'authors',
+      store: Ext.StoreManager.lookup('Author'),
+      columns: [
+        {
+          text: 'Имя',
+          dataIndex: 'first_name',
+          flex: 1
+        },
+        {
+          text: 'Фамилия',
+          dataIndex: 'middle_name',
+          flex: 1
+        },
+        {
+          text: 'Отчество',
+          dataIndex: 'last_name',
+          flex: 1
+        }
+      ],
+      dockedItems: [{
+        xtype: 'toolbar',
+        dock: 'top',
+        items: [{
+          xtype: 'button',
+          action: 'add',
+          text: 'Добавить'
+        }]
+      }]
     }]
   }]
 });

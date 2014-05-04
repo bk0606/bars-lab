@@ -1,26 +1,16 @@
 Ext.application({
   name: 'Lib',
   appFolder: '/static/library/app',
-<<<<<<< HEAD
-  controllers: ['Genre'],
-=======
-  controllers: ['Main', 'Genre'],
+  controllers: ['Main', 'Genre', 'Author'],
   views: ['Main'],
-  models: ['Genre'],
->>>>>>> upstream/master
+  models: ['Genre', 'Author'],
 
   launch: function() {
     Ext.create('Ext.container.Viewport', {
       layout: 'fit',
-<<<<<<< HEAD
-      items: [{
-        xtype: 'authorgrid'
-      }]
-=======
       items: {
         xtype: 'mainview'
       }
->>>>>>> upstream/master
     });
   }
 });

@@ -1,10 +1,6 @@
 Ext.define('Lib.controller.Genre', {
   extend: 'Ext.app.Controller',
   models: ['Genre'],
-<<<<<<< HEAD
-  stores: ['Genre', 'Authors'],
-  views: ['Authors']
-=======
   stores: ['Genre'],
   views: ['genre.EditWindow', 'Main'],
   refs: [{
@@ -12,7 +8,7 @@ Ext.define('Lib.controller.Genre', {
     ref: 'genresGrid'
   }],
 
-  init: function() {
+  init: function () {
     var me = this;
 
     me.control({
@@ -49,5 +45,4 @@ Ext.define('Lib.controller.Genre', {
       });
     }
   }
->>>>>>> upstream/master
 });
